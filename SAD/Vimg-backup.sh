@@ -15,12 +15,21 @@ virsh shutdown $NOM_MV
 
 # comprueba si la MV ya esta apagada y no continua hasta que este apagada
 CHECKMV=nulo
-until [ $CHECKMV = "apagado" ]
+until [ $CHECKMV = "apagado" ] || [ $CONTADOR -eq 60 ]
 do
 CHECKMV=$(virsh list --all |sed 's/  */:/g' | grep "$NOM_MV" |cut -d":" -f4)
 sleep 5
 CONTADOR=$(($CONTADOR + 1))
 done
+
+
+# Escapatoria apagado maquina fallido
+
+if [ $CONTADOR -ge 60 ]
+then
+exit
+
+else
 
 # comprueba el numero de incrementos
 NUM_INC=$(qemu-img info --backing-chain $IMG_FILE |grep -i backing|wc -l)
