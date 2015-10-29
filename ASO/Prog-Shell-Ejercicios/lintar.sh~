@@ -37,7 +37,7 @@ descomprimir()
 {
 read -p "Nombre del archivo a descomprimir: " NOM
 read -p "Ruta donde descomprimir: " RUT
-tar -zxvf $NOM -C $RUT
+tar -zxvf $NOM -D $RUT
 
 }
 

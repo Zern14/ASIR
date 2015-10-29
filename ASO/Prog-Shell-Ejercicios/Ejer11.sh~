@@ -1,6 +1,6 @@
 #/bin/bash
 
-HORA=$(date | cut -d" " -f4 |cut -d: -f1)
+HORA=date | cut -d" " -f4 |cut -d: -f1
 
 NOMBRE=$(cat /etc/passwd |grep $LOGNAME |cut -d: -f5 |cut -d, -f1)
 
